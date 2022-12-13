@@ -46,16 +46,57 @@ public class ArticleService {
 		return ResultData.from("S-1", Utility.f("%d번 게시물이 생성되었습니다", id), "id", id);
 	}
 
-	public ResultData actorCanModify(int loginedMemberId, Article article) {
+//	public ResultData actorCanModify(int loginedMemberId, Article article) {
+//		
+//		if(loginedMemberId != article.getMemberId()) {
+//			return ResultData.from("F-B", "해당 게시물에 대한 권한이 없습니다");
+//		}
+//		
+//		return ResultData.from("S-1", "수정 가능");
+//	}
+//	
+//	public ResultData actorCanDelete(int loginedMemberId, Article article) {
+//		
+//		if(article == null) {
+//			return ResultData.from("F-1", Utility.f("해당 게시물은 존재하지 않습니다"));
+//		}
+//		
+//		if(loginedMemberId != article.getMemberId()) {
+//			return ResultData.from("F-B", "해당 게시물에 대한 권한이 없습니다");
+//		}
+//		
+//		return ResultData.from("S-1", "삭제 가능");
+//	}
+	
+	public ResultData actorCanMD(int loginedMemberId, Article article) {
+		
+		if(article == null) {
+			return ResultData.from("F-1", Utility.f("해당 게시물은 존재하지 않습니다"));
+		}
 		
 		if(loginedMemberId != article.getMemberId()) {
 			return ResultData.from("F-B", "해당 게시물에 대한 권한이 없습니다");
 		}
 		
-		return ResultData.from("S-1", "수정 가능");
+		return ResultData.from("S-1", "가능");
+	}
+	
+	public Article getForPrintArticle(int loginedMemberId, int id) {
+		
+		Article article = articleRepository.getForPrintArticle(id);
+		
+		actorCanChangeData(loginedMemberId, article);
+		
+		return article;
 	}
 
-	public Article getForPrintArticle(int id) {
-		return articleRepository.getForPrintArticle(id);
+	private void actorCanChangeData(int loginedMemberId, Article article) {
+		if(article == null) {
+			return;
+		}
+		
+		ResultData actorCanChangeDataRd = actorCanMD(loginedMemberId, article);
+		article.setActorCanChangeData(actorCanChangeDataRd.isSuccess());
+		
 	}
 }

@@ -97,11 +97,11 @@ public class UsrArticleController {
 		
 		Article article = articleService.getArticle(id);
 
-		if (article == null) {
-			return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다", id));
-		}
+//		if (article == null) {
+//			return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다", id));
+//		}
 
-		ResultData actorCanModifyRd = articleService.actorCanModify(loginedMemberId, article);
+		ResultData actorCanModifyRd = articleService.actorCanMD(loginedMemberId, article);
 		
 		if(actorCanModifyRd.isFail()) {
 			return actorCanModifyRd;
@@ -111,9 +111,15 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/detail")
-	public String detail(Model model, int id) {
+	public String detail(HttpSession httpSession, Model model, int id) {
 
-		Article article = articleService.getForPrintArticle(id);
+		int loginedMemberId = 0;
+		
+		if(httpSession.getAttribute("loginedMemberId") != null) {
+			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId"); 
+		}
+		
+		Article article = articleService.getForPrintArticle(loginedMemberId, id);
 
 		model.addAttribute("article", article);
 		
