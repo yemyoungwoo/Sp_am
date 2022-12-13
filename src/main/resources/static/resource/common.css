@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Godo';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Godo';
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('woff');
+}
+
+html > body {
+ font-family: 'Godo', sans-serif;
+}
+
+.table-box-type-1 > table {
+	width: 100%;
+}
+ 
+.table-box-type-1 > table th, .table-box-type-1 > table td {
+	border:1px solid black;
+	padding: 10px;
+	text-align: center;
+}
