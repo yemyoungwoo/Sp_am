@@ -1,10 +1,10 @@
-package com.cjh.exam.demo.repository;
+package com.ymw.exam.demo.repository;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.cjh.exam.demo.vo.Article;
+import com.ymw.exam.demo.vo.Article;
 
 @Mapper
 public interface ArticleRepository {

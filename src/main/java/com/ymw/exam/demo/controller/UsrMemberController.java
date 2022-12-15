@@ -1,4 +1,4 @@
-package com.cjh.exam.demo.controller;
+package com.ymw.exam.demo.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -7,10 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cjh.exam.demo.service.MemberService;
-import com.cjh.exam.demo.util.Utility;
-import com.cjh.exam.demo.vo.Member;
-import com.cjh.exam.demo.vo.ResultData;
+import com.ymw.exam.demo.service.MemberService;
+import com.ymw.exam.demo.util.Utility;
+import com.ymw.exam.demo.vo.Member;
+import com.ymw.exam.demo.vo.ResultData;
+
 
 @Controller
 public class UsrMemberController {
@@ -55,6 +56,12 @@ public class UsrMemberController {
 		
 		return ResultData.from(doJoinRd.getResultCode(), doJoinRd.getMsg(), "member", member);
 	}
+	
+	@RequestMapping("/usr/member/login")
+	public String showLogin() {
+		return "usr/member/login";
+	}
+
 	
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody

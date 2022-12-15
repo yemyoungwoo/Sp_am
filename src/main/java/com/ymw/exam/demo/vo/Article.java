@@ -1,4 +1,4 @@
-package com.cjh.exam.demo.vo;
+package com.ymw.exam.demo.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +14,6 @@ public class Article {
 	private int memberId;
 	private String title;
 	private String body;
-	
 	private String writerName;
 	private boolean actorCanChangeData;
 }

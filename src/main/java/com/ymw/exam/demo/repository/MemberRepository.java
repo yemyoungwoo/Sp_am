@@ -1,10 +1,10 @@
-package com.cjh.exam.demo.repository;
+package com.ymw.exam.demo.repository;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import com.cjh.exam.demo.vo.Member;
+import com.ymw.exam.demo.vo.Member;
 
 @Mapper
 public interface MemberRepository {

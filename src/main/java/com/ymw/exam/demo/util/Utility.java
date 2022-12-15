@@ -1,6 +1,4 @@
-package com.cjh.exam.demo.util;
-
-import com.cjh.exam.demo.vo.ResultData;
+package com.ymw.exam.demo.util;
 
 public class Utility {
 

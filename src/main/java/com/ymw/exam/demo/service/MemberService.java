@@ -1,12 +1,12 @@
-package com.cjh.exam.demo.service;
+package com.ymw.exam.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cjh.exam.demo.repository.MemberRepository;
-import com.cjh.exam.demo.util.Utility;
-import com.cjh.exam.demo.vo.Member;
-import com.cjh.exam.demo.vo.ResultData;
+import com.ymw.exam.demo.repository.MemberRepository;
+import com.ymw.exam.demo.util.Utility;
+import com.ymw.exam.demo.vo.Member;
+import com.ymw.exam.demo.vo.ResultData;
 
 @Service
 public class MemberService {

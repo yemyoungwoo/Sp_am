@@ -8,6 +8,7 @@
 		<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed officiis tempore et in fugiat natus nobis
 			placeat veritatis repellat cupiditate similique est impedit. Tenetur optio facere a perferendis rem quasi!</div>
 		<div>안녕하세요</div>
+		<a class="btn-text-link" href="modify?id=${article.id }">로그인</a>
 	</div>
 </section>
 

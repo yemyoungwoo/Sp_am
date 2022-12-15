@@ -1,12 +1,12 @@
-package com.cjh.exam.demo.config;
+package com.ymw.exam.demo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.cjh.exam.demo.interceptor.BeforeActionInterceptor;
-import com.cjh.exam.demo.interceptor.NeedLoginInterceptor;
+import com.ymw.exam.demo.interceptor.BeforeActionInterceptor;
+import com.ymw.exam.demo.interceptor.NeedLoginInterceptor;
 
 @Configuration
 public class MyWebMvcConfigurer implements WebMvcConfigurer {

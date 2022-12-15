@@ -1,4 +1,4 @@
-package com.cjh.exam.demo.vo;
+package com.ymw.exam.demo.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

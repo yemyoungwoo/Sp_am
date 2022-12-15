@@ -1,14 +1,14 @@
-package com.cjh.exam.demo.service;
+package com.ymw.exam.demo.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cjh.exam.demo.repository.ArticleRepository;
-import com.cjh.exam.demo.util.Utility;
-import com.cjh.exam.demo.vo.Article;
-import com.cjh.exam.demo.vo.ResultData;
+import com.ymw.exam.demo.repository.ArticleRepository;
+import com.ymw.exam.demo.util.Utility;
+import com.ymw.exam.demo.vo.Article;
+import com.ymw.exam.demo.vo.ResultData;
 
 @Service
 public class ArticleService {
