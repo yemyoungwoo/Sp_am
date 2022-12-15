@@ -16,23 +16,23 @@ public class Rq {
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	private HttpSession session;
-
 	public Rq(HttpServletRequest req, HttpServletResponse resp) {
 		this.req = req;
 		this.resp = resp;
 		this.session = req.getSession();
-
+		
 		int loginedMemberId = 0;
-
+		
 		if(session.getAttribute("loginedMemberId") != null) {
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 		}
-
+		
 		this.loginedMemberId = loginedMemberId;
 	}
-	public void jsPrintHistoryBack(String msg) throws IOException{
+
+	public void jsPrintHistoryBack(String msg) {
 		resp.setContentType("text/html; charset=UTF-8");
-		
+
 		print(Utility.jsHistoryBack(msg));
 	}
 	private void print(String str) {
@@ -42,13 +42,17 @@ public class Rq {
 			e.printStackTrace();
 		}
 	}
-
 	public void login(Member member) {
 		session.setAttribute("loginedMemberId", member.getId());
 	}
-
 	public void logout() {
 		session.removeAttribute("loginedMemberId");
+	}
+
+	public String jsReturnOnView(String msg, boolean historyBack) {
+		req.setAttribute("msg", msg);
+		req.setAttribute("historyBack", historyBack);
+		return "usr/common/js";
 	}
 
 }
