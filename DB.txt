@@ -2,7 +2,6 @@
 DROP DATABASE IF EXISTS SB_AM_cjh;
 CREATE DATABASE SB_AM_cjh;
 USE SB_AM_cjh;
-
 # article 테이블 생성
 CREATE TABLE article(
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -11,7 +10,6 @@ CREATE TABLE article(
 	title VARCHAR(200) NOT NULL,
 	`body` TEXT NOT NULL
 );
-
 # member 테이블 생성
 CREATE TABLE `member`(
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -27,26 +25,22 @@ CREATE TABLE `member`(
 	delStatus TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴여부 (0 = 탈퇴 전, 1 = 탈퇴 후)',
 	delDate DATETIME COMMENT '탈퇴 날짜'
 );
-
 # article 데이터 추가
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목1',
 `body` = '내용1';
-
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목2',
 `body` = '내용2';
-
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목3',
 `body` = '내용3';
-
 # member 데이터 추가
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -58,7 +52,6 @@ loginPw = 'admin',
 nickname = '관리자',
 cellphoneNum = '01011112222',
 email = 'http-@naver.com';
-
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -68,7 +61,6 @@ loginPw = 'test1',
 nickname = '유저1',
 cellphoneNum = '01022223333',
 email = 'http-@naver.com';
-
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -79,13 +71,47 @@ nickname = '유저2',
 cellphoneNum = '01033334444',
 email = 'http-@naver.com';
 
-SELECT * FROM article
-SELECT * FROM `member`
-
-SELECT LAST_INSERT_ID();
-
 ALTER TABLE article ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
 
 UPDATE article
-SET memberId = 2
-WHERE memberId = 0;
+SET memberId = 2;
+
+# board 테이블 생성
+CREATE TABLE board(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	`code` VARCHAR(20) NOT NULL UNIQUE COMMENT 'notice(공지사항), QnA(질문게시판), free1(자유게시판1), ...',
+	`name` VARCHAR(20) NOT NULL UNIQUE COMMENT '게시판 이름',
+	delStatus TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '삭제여부 (0 = 삭제 전, 1 = 삭제 후)',
+	delDate DATETIME COMMENT '삭제 날짜'
+);
+
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'notice',
+`name` = '공지사항';
+
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'free1',
+`name` = '자유';
+
+# article 테이블에 boardId컬럼 추가
+ALTER TABLE article ADD COLUMN boardId INT UNSIGNED NOT NULL AFTER `memberId`;
+
+UPDATE article
+SET boardId = 1
+WHERE id IN (1,2);
+
+UPDATE article
+SET boardId = 2
+WHERE id IN (3);
+
+SELECT * FROM article;
+SELECT * FROM `member`;
+SELECT * FROM board;
+
+SELECT LAST_INSERT_ID();
