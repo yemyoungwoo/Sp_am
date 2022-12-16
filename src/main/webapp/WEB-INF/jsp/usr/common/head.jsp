@@ -7,7 +7,6 @@
 <title>${pageTitle}</title>
 <!-- 테일윈드 불러오기 -->
 <!-- 노말라이즈, 라이브러리 -->
-<script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" />
 <!-- 데이지 UI -->
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
