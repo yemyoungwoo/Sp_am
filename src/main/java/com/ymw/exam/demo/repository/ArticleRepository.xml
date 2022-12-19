@@ -6,9 +6,11 @@
 			SET regDate = NOW(),
 				updateDate = NOW(),
 				memberId = #{memberId},
+				boardId = #{boardId},
 				title = #{title},
 				`body` = #{body}
 	</insert>
+	
 	<select id="getArticle" resultType="Article">
 		SELECT * 
 			FROM article 

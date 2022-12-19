@@ -11,8 +11,25 @@
 					<colgroup>
 						<col width="200" />
 					</colgroup>
-
 					<tbody>
+						<tr>
+							<th>게시판</th>
+							<td>
+<!-- 								<select name="boardId"> -->
+<!-- 									<option>게시판을 선택해주세요</option> -->
+<!-- 									<option value="1">공지사항</option> -->
+<!-- 									<option value="2">자유</option> -->
+<!-- 								</select> -->
+								<label>
+									<input type="radio" name="boardId" value="1" checked/>&nbsp;공지사항
+								</label>
+								&nbsp;&nbsp;&nbsp;
+								<label>
+									<input type="radio" name="boardId" value="2"/>&nbsp;자유
+								</label>
+							</td>
+						</tr>
+					 <tbody>
 						<tr>
 							<th>제목</th>
 							<td><input class="input input-bordered w-full max-w-xs" type="text" name="title" placeholder="제목을 입력해주세요" /></td>
