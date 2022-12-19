@@ -42,8 +42,6 @@ public class ArticleService {
 		int id = articleRepository.getLastInsertId();
 		return ResultData.from("S-1", Utility.f("%d번 게시물이 생성되었습니다", id), "id", id);
 	}
-	
-
 //	public ResultData actorCanModify(int loginedMemberId, Article article) {
 //		
 //		if(loginedMemberId != article.getMemberId()) {
