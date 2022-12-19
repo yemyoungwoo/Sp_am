@@ -1,7 +1,7 @@
 # DB 삭제/생성/선택
-DROP DATABASE IF EXISTS SB_AM_cjh;
-CREATE DATABASE SB_AM_cjh;
-USE SB_AM_cjh;
+DROP DATABASE IF EXISTS SB_AM;
+CREATE DATABASE SB_AM;
+USE SB_AM;
 # article 테이블 생성
 CREATE TABLE article(
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -31,16 +31,19 @@ SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목1',
 `body` = '내용1';
+
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목2',
 `body` = '내용2';
+
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목3',
 `body` = '내용3';
+
 # member 데이터 추가
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -52,6 +55,7 @@ loginPw = 'admin',
 nickname = '관리자',
 cellphoneNum = '01011112222',
 email = 'http-@naver.com';
+
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -61,6 +65,7 @@ loginPw = 'test1',
 nickname = '유저1',
 cellphoneNum = '01022223333',
 email = 'http-@naver.com';
+
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),

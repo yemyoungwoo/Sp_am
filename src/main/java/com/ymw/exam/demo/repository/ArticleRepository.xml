@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.ymw.exam.demo.repository.ArticleRepository">
-
 	<insert id="writeArticle">
 		INSERT INTO article
 			SET regDate = NOW(),
@@ -11,7 +9,6 @@
 				title = #{title},
 				`body` = #{body}
 	</insert>
-
 	<select id="getArticle" resultType="Article">
 		SELECT * 
 			FROM article 
@@ -25,20 +22,23 @@
 			ON A.memberId = M.id
 			WHERE A.id = #{id}
 	</select>
-
 	<select id="getArticles" resultType="Article">
 		SELECT A.*, M.nickname AS writerName
 			FROM article AS A
 			INNER JOIN `member` AS M
-			ON A.memberId = M.id 
+			ON A.memberId = M.id
+			WHERE 1 = 1
+<!-- 			if 조건이 하나면 이처럼 안해도 되지만 여러개면 이 방식으로 처리 -->
+			<if test="boardId != 0">
+				AND A.boardId = #{boardId}
+			</if> 
 			ORDER BY A.id DESC
 	</select>
-	
+
 	<delete id="deleteArticle">
 		DELETE FROM article 
 			WHERE id = #{id}
 	</delete>
-
 	<update id="modifyArticle">
 		UPDATE article 
 			<set>
@@ -52,5 +52,4 @@
 	<select id="getLastInsertId" resultType="int">
 		SELECT LAST_INSERT_ID()
 	</select>
-
 </mapper>
