@@ -5,13 +5,23 @@
 
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
-		<div class="mb-2 flex justify-between items-center">
+		<div class="mb-2 flex justify-between">
 			<div>
 				<span>${articlesCount } 개</span>
 			</div>
-			<c:if test="${rq.getLoginedMemberId() != 0 }">
-				<a class="btn-text-link btn btn-active btn-ghost" href="/usr/article/write">WRITE</a>
-			</c:if>
+			<form>
+				<input type="hidden" name="boardId" value="${boardId }" />
+
+				<select data-value="${searchKeywordTypeCode }" class="select select-bordered" name="searchKeywordTypeCode">
+					<option value="title">제목</option>
+					<option value="body">내용</option>
+					<option value="title,body">제목 + 내용</option>
+				</select>
+
+				<input class="ml-2 w-84 input input-bordered" type="text" name="searchKeyword" placeholder="검색어를 입력해주세요" maxlength="20" value="${searchKeyword }" />
+
+				<button class="ml-2 btn btn-active btn-ghost">검색</button>
+			</form>
 		</div>
 		<div class="table-box-type-1">
 			<table class="table w-full">
@@ -35,6 +45,11 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="mt-2 flex justify-end">
+			<c:if test="${rq.getLoginedMemberId() != 0 }">
+				<a class="btn-text-link btn btn-active btn-ghost" href="/usr/article/write">WRITE</a>
+			</c:if>
+		</div>
 				<div class="page-menu mt-2 flex justify-center">
 			<div class="btn-group">
 <!-- 			>> -->
@@ -42,6 +57,7 @@
 				<c:set var="pageMenuLen" value="5" />
 				<c:set var="StartPage" value="${page - pageMenuLen >= 1 ? page - pageMenuLen : 1 }" />
 				<c:set var="endPage" value="${page + pageMenuLen <= pagesCount ? page + pageMenuLen : pagesCount }" />
+				<c:set var="pageBaseUri" value="?boardId=${boardId }&searchKeywordTypeCode=${searchKeywordTypeCode }&searchKeyword=${searchKeyword }" />
 				
 				<c:if test="${page == 1 }">
 					<a class ="btn btn-sm btn-disabled">☜</a>
@@ -49,11 +65,11 @@
 				</c:if>
 				
 				<c:if test="${page > 1 }">
-					<a class ="btn btn-sm" href="?boardId=${boardId }&page=1">☜</a>	
-					<a class ="btn btn-sm" href="?boardId=${boardId }&page=${page - 1}">←</a>	
+					<a class="btn btn-sm" href="${pageBaseUri }&page=1">☜</a>
+					<a class="btn btn-sm" href="${pageBaseUri }&page=${page - 1 }">←</a>
 				</c:if>
 				<c:forEach begin="${StartPage }" end="${endPage }" var="i">
-					<a class="btn btn-sm ${page == i ? 'btn-active' : ''}" href="?boardId=${boardId }&page=${i }">${i }</a>
+					<a class="btn btn-sm ${page == i ? 'btn-active' : ''}" href="${pageBaseUri }&page=${i }">${i }</a>
 				</c:forEach>
 				<c:if test="${page == pagesCount }">
 					<a class ="btn btn-sm btn-disabled">←</a>
@@ -61,8 +77,8 @@
 				</c:if>
 		
 		<c:if test="${page < pagesCount }">
-					<a class ="btn btn-sm" href="?boardId=${boardId }&page=${page + 1}">→</a>	
-					<a class ="btn btn-sm" href="?boardId=${boardId }&page=${pagesCount}">☞</a>	
+					<a class="btn btn-sm" href="${pageBaseUri }&page=${page + 1 }">→</a>
+					<a class="btn btn-sm" href="${pageBaseUri }&page=${pagesCount }">☞</a>
 				</c:if>
 			</div>
 		</div>

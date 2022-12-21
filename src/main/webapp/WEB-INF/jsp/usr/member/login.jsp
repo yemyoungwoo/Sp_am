@@ -11,15 +11,14 @@
 					<colgroup>
 						<col width="200" />
 					</colgroup>
-
 					<tbody>
 						<tr>
 							<th>로그인 아이디</th>
-							<td><input class="w-96" type="text" name="loginId" placeholder="아이디를 입력해주세요" /></td>
+							<td><input class="w-96" type="loginId" name="loginId" placeholder="아이디를 입력해주세요" /></td>
 						</tr>
 						<tr>
 							<th>로그인 비밀번호</th>
-							<td><input class="w-96" type="text" name="loginPw" placeholder="비밀번호를 입력해주세요" /></td>
+							<td><input class="w-96" type="password" name="password" placeholder="비밀번호를 입력해주세요" /></td>
 						</tr>
 						<tr>
 							<td colspan="2" ><input class="btn"  type="submit" value="로그인"/></td>
@@ -29,6 +28,8 @@
 			</div>
 		</form>
 		<div class="btns">
+				<button type="button" class="moveRegister" style="margin-top: 10px;">
+				</button>
 			<button class="btn" type="button" onclick="history.back();">뒤로가기</button>
 		</div>
 	</div>
