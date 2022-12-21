@@ -132,6 +132,13 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/detail")
 	public String ShowDetail(Model model, int id) {
+		
+		ResultData<Integer> increaseHitCountRd = articleService.increaseHitCount(id);
+
+		if(increaseHitCountRd.isFail()) {
+			return rq.jsReturnOnView(increaseHitCountRd.getMsg(), true);
+		}
+
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		model.addAttribute("article", article);

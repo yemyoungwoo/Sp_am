@@ -115,19 +115,23 @@ UPDATE article
 SET boardId = 2
 WHERE id IN (3);
 
+# article 테이블에 hitCount컬럼 추가
+ALTER TABLE article ADD COLUMN hitCount INT UNSIGNED NOT NULL DEFAULT 0;
+
 SELECT * FROM article;
 SELECT * FROM `member`;
 SELECT * FROM board;
 
+
 SELECT LAST_INSERT_ID();
 
 # 게시물 갯수 늘리기
--- INSERT Into article
--- (
--- 	regDate, updateDate, memberId, boardId, title, `body`
--- )
--- select now(), now(), Floor(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1, CONCAt('제목_',RAND()), CONCAT('내용_',RAND())
--- from article
+INSERT INTO article
+(
+regDate, updateDate, memberId, boardId, title, `body`
+)
+SELECT NOW(), NOW(), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1, CONCAT('제목_',RAND()), CONCAT('내용_',RAND())
+FROM article
 
--- select COUNT(*)
--- from article
+SELECT COUNT(*)
+FROM article
