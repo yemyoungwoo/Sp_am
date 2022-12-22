@@ -84,7 +84,6 @@
 					<a class ="btn btn-sm btn-disabled">←</a>
 					<a class ="btn btn-sm btn-disabled">☜</a>
 				</c:if>
-		
 		<c:if test="${page < pagesCount }">
 					<a class="btn btn-sm" href="${pageBaseUri }&page=${page + 1 }">→</a>
 					<a class="btn btn-sm" href="${pageBaseUri }&page=${pagesCount }">☞</a>
