@@ -9,6 +9,14 @@
 	params.id = parseInt('${param.id}')
 	
 	function ArticleDetail__increaseHitCount() {
+		
+		const localStorageKey = 'article__' + params.id + '__alreadyView';
+		
+		if(localStorage.getItem(localStorageKey)) {
+			return;
+		}
+		localStorage.setItem(localStorageKey, true);
+		
 		$.get('doIncreaseHitCountRd', {
 			id : params.id,
 			ajaxMode : 'Y'

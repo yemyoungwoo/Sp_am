@@ -136,7 +136,11 @@ public class UsrArticleController {
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		model.addAttribute("article", article);
 		return "usr/article/detail";
-	}
+
+		
+	}	
+	
+	
 	@RequestMapping("/usr/article/doIncreaseHitCountRd")
 	@ResponseBody
 	public ResultData<Integer> doIncreaseHitCountRd(int id) {
@@ -145,7 +149,7 @@ public class UsrArticleController {
 
 		if(increaseHitCountRd.isFail()) {
 			return increaseHitCountRd;
-		}
+		}	
 
 		ResultData<Integer> rd = ResultData.from(increaseHitCountRd.getResultCode(), increaseHitCountRd.getMsg(),
 				"hitCount", articleService.getArticleHitCount(id));

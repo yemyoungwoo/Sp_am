@@ -25,12 +25,20 @@
 		</div>
 		<div class="table-box-type-1">
 			<table class="table w-full">
+			<colgroup>
+				<col width="60" />
+				<col width="200" />
+				<col  />
+				<col width="120" />
+				<col width="50" />
+			</colgroup>
 				<thead>
 					<tr>
 						<th>번호</th>
 						<th>날짜</th>
 						<th>제목</th>
 						<th>작성자</th>
+						<th>조회수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -40,6 +48,7 @@
 							<td>${article.regDate.substring(2,16)}</td>
 							<td><a class="hover:underline" href="detail?id=${article.id}">${article.title}</a></td>
 							<td>${article.writerName}</td>
+							<td>${article.hitCount}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

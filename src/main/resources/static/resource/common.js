@@ -7,3 +7,4 @@ $('select[data-value]').each(function(index, element){
 		$el.val(defaultValue);
 	}
 })
+
