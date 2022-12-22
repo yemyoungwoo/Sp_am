@@ -17,4 +17,8 @@ public class Article {
 	private int hitCount;
 	private String writerName;
 	private boolean actorCanChangeData;
+	private int sumReactionPoint;
+	private int goodReactionPoint;
+	private int badReactionPoint;
+	
 }
