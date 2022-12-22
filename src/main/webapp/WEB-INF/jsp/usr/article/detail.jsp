@@ -24,6 +24,8 @@
 			$('.article-detail__hit-count').empty().html(data.data1);
 		}, 'json')
 	}
+	
+	
 	$(function(){
 		//실전코드
 	// 	ArticleDetail__increaseHitCount()
