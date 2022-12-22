@@ -17,7 +17,7 @@
 					<option value="body">내용</option>
 					<option value="title,body">제목 + 내용</option>
 				</select>
-
+				
 				<input class="ml-2 w-84 input input-bordered" type="text" name="searchKeyword" placeholder="검색어를 입력해주세요" maxlength="20" value="${searchKeyword }" />
 
 				<button class="ml-2 btn btn-active btn-ghost">검색</button>
