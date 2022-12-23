@@ -53,12 +53,27 @@
 						<td>${article.regDate}</td>
 					</tr>
 					<tr>
+						<th>추천</th>
+						<td>${article.sumReactionPoint}</td>
+					</tr>
+					<tr>
 						<th>수정날짜</th>
 						<td>${article.updateDate}</td>
 					</tr>
 					<tr>
-						<th>조회수</th>
-						<td><span class="badge article-detail__hit-count">${article.hitCount}</span></td>
+						<th>추천</th>
+						<td>
+							<c:if test="${rq.getLoginedMemberId() == 0 }">
+								<span class="badge">${article.sumReactionPoint}</span>
+							</c:if>
+							<c:if test="${rq.getLoginedMemberId() != 0 }">
+								<button class="btn btn-xs btn-outline">좋아요 👍</button>
+								<span class="badge">좋아요 : ${article.goodReactionPoint}개</span>
+								<br />
+								<button class="btn btn-xs btn-outline">싫어요 👎</button>
+								<span class="badge">싫어요 : ${article.badReactionPoint}개</span>
+							</c:if>
+						</td>
 					</tr>
 					<tr>
 						<th>작성자</th>
@@ -66,9 +81,7 @@
 					</tr>
 					<tr>
 						<th>제목</th>
-						<td>${article.title}</td>
-					</tr>
-					<tr>
+						<td>${article.title}<tr>
 						<th>내용</th>
 						<td>${article.body}</td>
 					</tr>
