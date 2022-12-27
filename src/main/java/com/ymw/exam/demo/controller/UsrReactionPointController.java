@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ymw.exam.demo.service.ArticleService;
 import com.ymw.exam.demo.service.ReactionPointService;
+import com.ymw.exam.demo.util.Utility;
 import com.ymw.exam.demo.vo.Article;
 import com.ymw.exam.demo.vo.ReactionPoint;
 import com.ymw.exam.demo.vo.ResultData;
@@ -28,46 +29,66 @@ public class UsrReactionPointController {
 
 	@RequestMapping("/usr/reactionPoint/getReactionPoint")
 	@ResponseBody
-	public ResultData<ReactionPoint> getReactionPoint(int id) {
+	public ResultData<ReactionPoint> getReactionPoint(int id, String relTypeCode) {
 
 		Article article = articleService.getArticle(id);
 
-		if(article == null) {
+		if (article == null) {
 			return ResultData.from("F-1", "해당 게시물은 존재하지 않습니다");
 		}
 
-		ReactionPoint reactionPoint = reactionPointService.getReactionPoint(rq.getLoginedMemberId(), id);
+		ReactionPoint reactionPoint = reactionPointService.getReactionPoint(rq.getLoginedMemberId(), relTypeCode, id);
 
 		return ResultData.from("S-1", "리액션 정보 조회 성공", "reactionPoint", reactionPoint);
 	}
 
-	@RequestMapping("/usr/reactionPoint/doGoodReactionPoint")
+	@RequestMapping("/usr/reactionPoint/doReactionPoint")
 	@ResponseBody
-	public ResultData<Integer> doGoodReactionPoint(int id) {
+	public String doReactionPoint(int id, String relTypeCode, int point) {
 
 		Article article = articleService.getArticle(id);
 
 		if(article == null) {
-			return ResultData.from("F-1", "해당 게시물은 존재하지 않습니다");
+			return Utility.jsHistoryBack("해당 게시물은 존재하지 않습니다");
 		}
 
-		int affectedRow = reactionPointService.doGoodReactionPoint(rq.getLoginedMemberId(), id);
+		ReactionPoint reactionPoint = reactionPointService.getReactionPoint(rq.getLoginedMemberId(), relTypeCode, id);
 
-		return ResultData.from("S-1", "좋아요 성공", "affectedRow", affectedRow);
+		if(reactionPoint.getSumReactionPoint() != 0) {
+			reactionPointService.delReactionPoint(rq.getLoginedMemberId(), relTypeCode, id);
+		}
+
+		reactionPointService.doReactionPoint(rq.getLoginedMemberId(), id, relTypeCode, point);
+
+		if(point == 1) {
+			return Utility.jsReplace(Utility.f("%d번 글에 좋아요", id), Utility.f("../article/detail?id=%d", id));
+		} else {
+			return Utility.jsReplace(Utility.f("%d번 글에 싫어요", id), Utility.f("../article/detail?id=%d", id));
+		}
 	}
 
-	@RequestMapping("/usr/reactionPoint/doBadReactionPoint")
+	@RequestMapping("/usr/reactionPoint/delReactionPoint")
 	@ResponseBody
-	public ResultData<Integer> doBadReactionPoint(int id) {
+	public String delReactionPoint(int id, String relTypeCode, int point) {
 
 		Article article = articleService.getArticle(id);
 
-		if(article == null) {
-			return ResultData.from("F-1", "해당 게시물은 존재하지 않습니다");
+		if (article == null) {
+			return Utility.jsHistoryBack("해당 게시물은 존재하지 않습니다");
 		}
 
-		int affectedRow = reactionPointService.doBadReactionPoint(rq.getLoginedMemberId(), id);
+		ReactionPoint reactionPoint = reactionPointService.getReactionPoint(rq.getLoginedMemberId(), relTypeCode, id);
 
-		return ResultData.from("S-1", "싫어요 성공", "affectedRow", affectedRow);
+		if (reactionPoint.getSumReactionPoint() == 0) {
+			return Utility.jsHistoryBack("취소할거 없음");
+		}
+
+		reactionPointService.delReactionPoint(rq.getLoginedMemberId(), relTypeCode, id);
+
+		if (point == 1) {
+			return Utility.jsReplace(Utility.f("%d번 글에 좋아요 취소", id), Utility.f("../article/detail?id=%d", id));
+		} else {
+			return Utility.jsReplace(Utility.f("%d번 글에 싫어요 취소", id), Utility.f("../article/detail?id=%d", id));
+		}
 	}
 }
