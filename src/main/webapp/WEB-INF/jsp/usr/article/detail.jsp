@@ -24,9 +24,10 @@
 			$('.article-detail__hit-count').empty().html(data.data1);
 		}, 'json')
 	}
-function ReactionPoint__getReactionPoint() {
-		
-		$.get('../reactionPoint/getReactionPoint', {
+
+	function ReactionPoint__getReactionPoint() {
+
+	$.get('../reactionPoint/getReactionPoint', {
 			id : params.id,
 			relTypeCode : 'article',
 			ajaxMode : 'Y'
@@ -34,18 +35,18 @@ function ReactionPoint__getReactionPoint() {
 			if(data.data1.sumReactionPoint > 0){
 				let goodBtn = $('#goodBtn'); 
 				goodBtn.removeClass('btn-outline');
-// 				goodBtn.prop('href', '../reactionPoint/delReactionPoint?id=${article.id}&relTypeCode=article&point=1')
+				goodBtn.prop('href', '../reactionPoint/delReactionPoint?id=${article.id}&relTypeCode=article&point=1')
 			}else if(data.data1.sumReactionPoint < 0){
 				let badBtn = $('#badBtn');
 				badBtn.removeClass('btn-outline');
-// 				badBtn.prop('href', '../reactionPoint/delReactionPoint?id=${article.id}&relTypeCode=article&point=-1')
+				badBtn.prop('href', '../reactionPoint/delReactionPoint?id=${article.id}&relTypeCode=article&point=-1')
 			}
 		}, 'json');
 	}
 	
 	$(function(){
 		//실전코드
-	// 	ArticleDetail__increaseHitCount()
+		ArticleDetail__increaseHitCount()
 	ReactionPoint__getReactionPoint();
 	
 	//연습코드
