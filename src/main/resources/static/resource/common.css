@@ -34,3 +34,9 @@ html > body {
 	color: silver;
 	text-decoration: underline;
 }
+.border-bottom-line {
+	border-bottom: 1px solid #e1e1e1;
+}
+body {
+	min-width: 800px;
+}
