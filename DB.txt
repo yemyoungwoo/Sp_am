@@ -217,6 +217,9 @@ relTypeCode = 'article',
 relId = 1,
 `body` = '댓글 4';
 
+ALTER TABLE `SB_AM_`.`reply` ADD INDEX (`relTypeCode` , `relId`);
+
+
 SELECT * FROM article;
 SELECT * FROM `member`;
 SELECT * FROM board;
