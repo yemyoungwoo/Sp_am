@@ -26,10 +26,4 @@ public class ReactionPointService {
 		reactionPointRepository.delReactionPoint(loginedMemberId, relTypeCode, id);
 	}
 
-	public int doGoodReactionPoint(int loginedMemberId, int id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
 }

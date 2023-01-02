@@ -66,4 +66,12 @@ public class ReplyService {
 	public void deleteReply(int id) {
 		replyRepository.deleteReply(id);
 	}
+
+	public void modifyReply(int id, String body) {
+		replyRepository.modifyReply(id, body);
+	}
+
+	public Reply getReplyContent(int id) {
+		return replyRepository.getReplyContent(id);
+	}
 }

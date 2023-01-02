@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.ymw.exam.demo.vo.Reply;
 
@@ -50,4 +51,21 @@ public interface ReplyRepository {
 				WHERE id = #{id}
 			""")
 	void deleteReply(int id);
+	
+	@Update("""
+			UPDATE reply
+				SET updateDate = NOW(),
+					`body` = #{body}
+				WHERE id = #{id}
+			""")
+	void modifyReply(int id, String body);
+
+	@Select("""
+			SELECT R.*, M.nickname AS writerName
+				FROM reply AS R
+				INNER JOIN `member` AS M
+				ON R.memberId = M.id
+				WHERE R.id = #{id}
+			""")
+	Reply getReplyContent(int id);
 }
