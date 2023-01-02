@@ -71,7 +71,8 @@ public interface MemberRepository {
 
 	@Update("""
 			UPDATE `member`
-				SET loginPw = #{loginPw}
+				SET updateDate = NOW(), 
+				loginPw = #{loginPw}
 				WHERE id = #{loginedMemberId}
 			""")
 	public void doPassWordModify(int loginedMemberId, String loginPw);
