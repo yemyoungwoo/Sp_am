@@ -127,7 +127,7 @@ public class UsrMemberController {
 
 		memberService.doModify(rq.getLoginedMemberId(), nickname, cellphoneNum, email);
 
-		return Utility.jsReplace("회원정보가 수정되었습니다", "/");
+		return Utility.jsReplace("회원정보가 수정되었습니다", "myPage");
 	}
 
 	@RequestMapping("/usr/member/passWordModify")
@@ -151,6 +151,6 @@ public class UsrMemberController {
 
 		memberService.doPassWordModify(rq.getLoginedMemberId(), loginPw);
 
-		return Utility.jsReplace("비밀번호가 수정되었습니다", "/");
+		return Utility.jsReplace("비밀번호가 수정되었습니다", "myPage");
 	}
 }
