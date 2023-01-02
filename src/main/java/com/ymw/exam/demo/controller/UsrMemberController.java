@@ -96,24 +96,52 @@ public class UsrMemberController {
 	}
 
 	@RequestMapping("/usr/member/doCheckPassword")
+	@ResponseBody
 	public String doCheckPassword(String loginPw) {
-
+		
 		if (Utility.empty(loginPw)) {
-			return rq.jsReturnOnView("비밀번호를 입력해주세요", true);
+			return Utility.jsHistoryBack("비밀번호를 입력해주세요"); 
 		}
-
+		
 		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
-			return rq.jsReturnOnView("비밀번호가 일치하지 않습니다", true);
+			return Utility.jsHistoryBack("비밀번호가 일치하지 않습니다");
+		}
+		
+		String memberModifyAuthKey = memberService.genMemberModifyAuthKey(rq.getLoginedMemberId());
+		
+		return Utility.jsReplace("비밀번호가 확인되었습니다", Utility.f("modify?memberModifyAuthKey=%s", memberModifyAuthKey));
+	}
+	
+	@RequestMapping("/usr/member/modify")
+	public String showModify(String memberModifyAuthKey) {
+
+		if (Utility.empty(memberModifyAuthKey)) {
+			return rq.jsReturnOnView("회원 수정 인증코드가 필요합니다", true);
 		}
 
-		String memberModifyAuthKey = memberService.genMemberModifyAuthKey(rq.getLoginedMemberId());
+		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(), memberModifyAuthKey);
 
-		return "usr/member/modify?memberModifyAuthKey=" + memberModifyAuthKey;
+		if (checkMemberModifyAuthKeyRd.isFail()) {
+			return rq.jsReturnOnView(checkMemberModifyAuthKeyRd.getMsg(), true);
+		}
+
+		return "usr/member/modify";
 	}
+
 
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
-	public String doModify(String nickname, String cellphoneNum, String email) {
+	public String doModify(String memberModifyAuthKey, String nickname, String cellphoneNum, String email) {
+
+		if (Utility.empty(memberModifyAuthKey)) {
+			return Utility.jsHistoryBack("회원 수정 인증코드가 필요합니다");
+		}
+
+		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(), memberModifyAuthKey);
+
+		if (checkMemberModifyAuthKeyRd.isFail()) {
+			return Utility.jsHistoryBack(checkMemberModifyAuthKeyRd.getMsg());
+		}
 
 		if (Utility.empty(nickname)) {
 			return Utility.jsHistoryBack("닉네임을 입력해주세요");
@@ -131,13 +159,34 @@ public class UsrMemberController {
 	}
 
 	@RequestMapping("/usr/member/passWordModify")
-	public String passWordModify() {
+	public String passWordModify(String memberModifyAuthKey) {
+
+		if (Utility.empty(memberModifyAuthKey)) {
+			return rq.jsReturnOnView("회원 수정 인증코드가 필요합니다", true);
+		}
+
+		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(), memberModifyAuthKey);
+
+		if (checkMemberModifyAuthKeyRd.isFail()) {
+			return rq.jsReturnOnView(checkMemberModifyAuthKeyRd.getMsg(), true);
+		}
+
 		return "usr/member/passWordModify";
 	}
 
 	@RequestMapping("/usr/member/doPassWordModify")
 	@ResponseBody
-	public String doPassWordModify(String loginPw, String loginPwConfirm) {
+	public String doPassWordModify(String memberModifyAuthKey, String loginPw, String loginPwConfirm) {
+		if (Utility.empty(memberModifyAuthKey)) {
+			return Utility.jsHistoryBack("회원 수정 인증코드가 필요합니다");
+		}
+
+		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(), memberModifyAuthKey);
+
+		if (checkMemberModifyAuthKeyRd.isFail()) {
+			return Utility.jsHistoryBack(checkMemberModifyAuthKeyRd.getMsg());
+		}
+
 
 		if (Utility.empty(loginPw)) {
 			return Utility.jsHistoryBack("새 비밀번호를 입력해주세요");
