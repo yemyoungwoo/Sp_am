@@ -2,11 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="ARTICLE MODIFY" />
 <%@ include file="../common/head.jsp"%>
+<%@ include file="../common/toastEditorLib.jsp"%>
 
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
-		<form action="doModify" method="POST">
+		<form action="doModify" method="POST" onsubmit="submitWriteForm(this); return false;">
 			<input type="hidden" name="id" value="${article.id }"/>
+			<input type="hidden" name="body" />
 			<div class="table-box-type-1">
 				<table>
 					<colgroup>
@@ -36,7 +38,11 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea name="body" placeholder="내용을 입력해주세요">${article.body }</textarea></td>
+							<td>
+								<div class="toast-ui-editor">
+      								<script type="text/x-template" >${article.getForPrintBody() }</script>
+    							</div>
+    						</td>
 						</tr>
 						<tr>
 							<td colspan="2"><button>수정</button></td>
