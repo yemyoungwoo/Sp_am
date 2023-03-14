@@ -8,6 +8,7 @@ import com.ymw.exam.demo.vo.Board;
 @Mapper
 public interface BoardRepository {
 
+
 	@Select("""
 			SELECT *
 			FROM board

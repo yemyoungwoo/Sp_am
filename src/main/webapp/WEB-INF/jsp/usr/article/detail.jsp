@@ -187,7 +187,7 @@ function ReplyModify__getForm(replyId, i) {
 <section class="mt-5 text-xl mb-5">
 	<div class="container mx-auto px-3">
 		<h2>댓글<span class="text-base">(${replies.size() }개)</span></h2>
-
+		
 		<c:forEach var="reply" items="${replies}" varStatus="status">
 			<div id="${status.count }" class="py-2 pl-16 border-bottom-line text-base">
 				<div class="flex justify-between">

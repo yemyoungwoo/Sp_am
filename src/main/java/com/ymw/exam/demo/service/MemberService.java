@@ -52,7 +52,7 @@ public class MemberService {
 	private Member getMemberByNameAndEmail(String name, String email) {
 		return memberRepository.getMemberByNameAndEmail(name, email);
 	}
-	
+
 	public void doModify(int loginedMemberId, String nickname, String cellphoneNum, String email) {
 		memberRepository.doModify(loginedMemberId, nickname, cellphoneNum, email);
 	}
@@ -71,7 +71,6 @@ public class MemberService {
 	}
 	public ResultData checkMemberModifyAuthKey(int loginedMemberId, String memberModifyAuthKey) {
 		String saved = attrService.getValue("member", loginedMemberId, "extra", "memberModifyAuthKey");
-
 		if (!saved.equals(memberModifyAuthKey)) {
 			return ResultData.from("F-1", "일치하지 않거나 만료된 인증코드입니다");
 		}

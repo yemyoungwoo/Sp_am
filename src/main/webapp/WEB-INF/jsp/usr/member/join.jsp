@@ -4,7 +4,6 @@
 <%@ include file="../common/head.jsp"%>
 
 <script>
-
 	let validLoginId = '';
 
 	function MemberJoin__submit(form) {
@@ -78,7 +77,7 @@
 			return;
 		}
 		
-		$.get('getLoginIdDup', {
+		$.get('checkLoginIdDup', {
 			loginId : form.loginId.value,
 			ajaxMode : 'Y'
 		}, function(data){

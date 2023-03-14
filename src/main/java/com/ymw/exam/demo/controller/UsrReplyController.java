@@ -32,7 +32,7 @@ public class UsrReplyController {
 
 		int id = writeReplyRd.getData1();
 
-		return Utility.jsReplace(Utility.f("%d번 댓글이 생성되었습니다", id), Utility.f("../article/detail?id=%d", relId));
+		return Utility.jsReplace(Utility.f("댓글이 생성되었습니다", id), Utility.f("../article/detail?id=%d", relId));
 	}
 	@RequestMapping("/usr/reply/doDelete")
 	@ResponseBody
